@@ -1,74 +1,40 @@
 <template>
   <v-container max-width="700">
-    <h1>Exercice 8</h1>
-    <div class="exe-objectifs">
-      <h2>Objectifs</h2>
-      Les slot avec zones de contenu nommées permettent de définir des zones de contenu dans un composant enfant.
-      <ul>
-        <li>Créer un composant enfant <code>PokemonCard</code> qui reçoit les données d'un Pokémon via une <strong>prop</strong>.</li>
-        <li>Utiliser un <strong>événement personnalisé</strong> pour permettre au composant enfant de signaler sa suppression au parent.</li>
-        <li>Ajouter un champ de formulaire dans le composant parent pour ajouter un Pokémon à la liste.</li>
-        <li>Afficher une liste de cartes Pokémon dans le composant parent et permettre leur suppression.</li>
-      </ul>
-    </div>
-    <v-divider class="my-4" />
+    <!-- Données de l'exercice -->
+    <exercice-objectifs number="9"/>
+    <!-- Zone de travail pour l'exercice -->
     <div class="exe-zone">
       <h2>Zone d'exercice</h2>
-      <!-- Formulaire pour ajouter un Pokémon -->
-      <v-form @submit.prevent="addPokemon" class="mb-4">
-        <v-text-field
-          v-model="newPokemon"
-          label="Ajouter un Pokémon"
-          placeholder="Entrez le nom d'un Pokémon"
-          outlined
-        ></v-text-field>
-        <v-btn type="submit" color="primary" class="mt-2">
-          Ajouter
-        </v-btn>
-      </v-form>
-
-      <!-- Liste des Pokémon -->
-      <v-card class="mx-auto my-6 pa-2" max-width="500">
-        <v-card-title>Liste des Pokémon</v-card-title>
+      <!-- À faire : utiliser un composant, des slots et afficher dynamiquement les items du tableau -->
+      <v-card>
+        <v-card-title>
+          <strong>** HEADER **</strong>
+        </v-card-title>
         <v-card-text>
-          <v-alert v-if="pokemons.length === 0" type="info">
-            La liste est vide.
-          </v-alert>
-          <v-list v-else>
-            <PokemonCard
-              v-for="(pokemon, index) in pokemons"
-              :key="index"
-              :pokemonName="pokemon"
-              @remove="removePokemon(index)"
-            />
-          </v-list>
+          ** CONTENT **
         </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary">** FOOTER ** (bouton)</v-btn>
+        </v-card-actions>
       </v-card>
     </div>
   </v-container>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import PokemonCard from "@/components/PokemonCard.vue";
+// Importation des données de l'exercice
+import ExerciceObjectifs from "@/components/ExerciceObjectifs.vue";
 
-// Liste initiale des Pokémon
-const pokemons = ref(["Pikachu", "Bulbizarre", "Salamèche", "Carapuce", "Rondoudou"]);
+// Données préparées pour l'exercice
+// eslint-disable-next-line no-unused-vars <-- cette ligne empêche l'erreur de variable non utilisée
+const items = [
+  { id: 1, header: "EMT", content: "Cité des Microtechniques - Porrentruy", footer: "S'inscrire à l'EMT" },
+  { id: 2, header: "ESIG", content: "Rue de l'Avenir 33a - Delémont", footer: "S'inscrire à l'ESIG" },
+  { id: 3, header: "HEG", content: "Espace de l'Europe 20 - Neuchâtel", footer: "S'inscrire à la HEG" }
+];
 
-// Champ de saisie pour un nouveau Pokémon
-const newPokemon = ref('');
-
-// Ajouter un Pokémon à la liste
-const addPokemon = () => {
-  const trimmedPokemon = newPokemon.value.trim();
-  if (trimmedPokemon) {
-    pokemons.value.push(trimmedPokemon);
-    newPokemon.value = ''; // Réinitialise le champ de saisie
-  }
-};
-
-// Supprimer un Pokémon de la liste
-const removePokemon = (index) => {
-  pokemons.value.splice(index, 1);
-};
 </script>
+
+<style scoped lang="sass">
+
+</style>
