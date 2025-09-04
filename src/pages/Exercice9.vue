@@ -5,17 +5,15 @@
     <!-- Zone de travail pour l'exercice -->
     <div class="exe-zone">
       <h2>Zone d'exercice</h2>
-      <v-card
-        class="mx-auto my-6 pa-2"
-        max-width="500"
-      >
-        <v-card-title>
-          Coucou
-        </v-card-title>
-        <v-card-text>
-          <p>Je suis là !</p>
-        </v-card-text>
-      </v-card>
+      <carte-avec-slots v-for="item in items" :key="item.id">
+        <template #header>
+          {{ item.header }}
+        </template>
+          {{ item.content }}
+        <template #footer>
+          <v-btn color="primary">{{ item.footer }}</v-btn>
+        </template>
+      </carte-avec-slots>
 
     </div>
   </v-container>
@@ -24,18 +22,14 @@
 <script setup>
 // Importation des données de l'exercice
 import ExerciceObjectifs from "@/components/ExerciceObjectifs.vue";
+import CarteAvecSlots from "@/components/CarteAvecSlots.vue";
 // Importer les méthodes de vue
-import {onMounted, onUnmounted} from 'vue';
+const items = [
+  { id: 1, header: "EMT", content: "Cité des Microtechniques - Porrentruy", footer: "S'inscrire à l'EMT" },
+  { id: 2, header: "ESIG", content: "Rue de l'Avenir 33a - Delémont", footer: "S'inscrire à l'ESIG" },
+  { id: 3, header: "HEG", content: "Espace de l'Europe 20 - Neuchâtel", footer: "S'inscrire à la HEG" }
+];
 
-// onMounted est appelé juste avant le montage du composant
-onMounted(() => {
-  alert('Composant monté avec succès !');
-});
-
-// onUnmounted est appelé juste avant le démontage du composant
-onUnmounted(() => {
-  alert('Composant démonté !');
-});
 </script>
 
 <style scoped lang="sass">
